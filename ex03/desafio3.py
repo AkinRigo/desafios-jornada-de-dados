@@ -1,9 +1,6 @@
 # integre na solução anterior um fluxo de while
 # que repita o fluxo até que o usuário insira as informações corretas
 
-
-CONSTANTE_BONUS = 1000
-
 # Adicionanda duas funções que verificam se o campo esta vazio ou se o nome foi digitado errado
 
 nome_valido = False
@@ -49,8 +46,6 @@ while bonus_valido is not True:
 
         bonus_usuario = float(input("Digite o seu bônus: "))
 
-        valor_bonus = CONSTANTE_BONUS + salario_usuario * bonus_usuario
-
         if bonus_usuario < 300:
             print("Erro: o valor do bônus deve ser igual ou maior que R$300,00")
         else:    
@@ -58,3 +53,9 @@ while bonus_valido is not True:
         
     except ValueError:
         print("Erro: você deve inserir apenas números!")
+
+        valor_bonus = 1000 + salario_usuario * bonus_usuario
+
+
+# Imprime as informações para o usuário
+print(f"{nome_usuario}, seu salário é R${salario_usuario:.2f} e seu bônus final é R${valor_bonus:.2f}.")
