@@ -1,61 +1,58 @@
-# integre na solução anterior um fluxo de while
-# que repita o fluxo até que o usuário insira as informações corretas
+import locale
+locale.setlocale(locale.LC_ALL, '')  # Windows (pode funcionar dependendo da região)
 
-# Adicionanda duas funções que verificam se o campo esta vazio ou se o nome foi digitado errado
+
+
+from colorama import init, Fore, Style
+
+init(autoreset=True)
 
 nome_valido = False
 salario_valido = False
 bonus_valido = False
 
+# Validação do nome
 while not nome_valido:
     try:
-        nome_usuario = input("Digite seu nome:" )
+        nome_usuario = input(Fore.CYAN + "Digite seu nome: ")
 
-        #verifica se o nome esta vazio
-        if len(nome_usuario) == 0:
-            raise ValueError ("O campo 'nome' não pode ficar vazio! ") 
-        # verifica se há números no nome
+        if len(nome_usuario.strip()) == 0:
+            raise ValueError(Fore.YELLOW + "⚠️ O campo 'nome' não pode ficar vazio!") 
         elif nome_usuario.isdigit():
-            raise ValueError("O nome não deve conter números.")
+            raise ValueError(Fore.RED + "❌ O nome não deve conter números.")
         else:
-            print("Nome válido:", nome_usuario)
+            print(Fore.GREEN + f"✅ Nome válido: {nome_usuario}")
             nome_valido = True
     except ValueError as e:
         print(e)
 
-###########################################################  
-#  
-
-
-while salario_valido is not True:
+# Validação do salário
+while not salario_valido:
     try:
-        salario_usuario = float(input("Digite seu salário: "))
+        salario_usuario = float(input(Fore.CYAN + "Digite seu salário: "))
         if salario_usuario < 1500:
-            print("Erro: o salário deve ser igual ou maior que R$1.500,00!")
+            print(Fore.YELLOW + "⚠️ Erro: o salário deve ser igual ou maior que R$1.500,00!")
+        else:
+            print(Fore.GREEN + f"✅ Salário registrado: R${salario_usuario:.2f}")
             salario_valido = True
     except ValueError:
-        print("Erro: você deve inserir apenas números!")
+        print(Fore.RED + "❌ Erro: você deve inserir apenas números!")
 
-
-#####################################################
-
-
-while bonus_valido is not True:
-
+# Validação do bônus
+while not bonus_valido:
     try:
-
-        bonus_usuario = float(input("Digite o seu bônus: "))
-
+        bonus_usuario = float(input(Fore.CYAN + "Digite o seu bônus: "))
         if bonus_usuario < 300:
-            print("Erro: o valor do bônus deve ser igual ou maior que R$300,00")
-        else:    
-            print(f"O usuário {nome_usuario} possui o bônus de {valor_bonus}.")
-        
+            print(Fore.YELLOW + "⚠️ Erro: o valor do bônus deve ser igual ou maior que R$300,00")
+        else:
+            valor_bonus = 1000 + (salario_usuario * (bonus_usuario / 100))
+            print(Fore.GREEN + f"✅ O usuário {nome_usuario} possui o bônus de R${valor_bonus:.2f}.")
+            bonus_valido = True
     except ValueError:
-        print("Erro: você deve inserir apenas números!")
+        print(Fore.RED + "❌ Erro: você deve inserir apenas números!")
 
-        valor_bonus = 1000 + salario_usuario * bonus_usuario
+# Resultado final
+salario_formatado = locale.currency(salario_usuario, grouping=True)
+bonus_formatado = locale.currency(valor_bonus, grouping=True)
 
-
-# Imprime as informações para o usuário
-print(f"{nome_usuario}, seu salário é R${salario_usuario:.2f} e seu bônus final é R${valor_bonus:.2f}.")
+print(Style.BRIGHT + Fore.CYAN + f"\n🎉 {nome_usuario}, seu salário é {salario_formatado} e seu bônus final é {bonus_formatado}.")
