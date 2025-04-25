@@ -1,6 +1,6 @@
 # 📚 Sistema de Escolha de Livros
 
-Este projeto é um programa em Python que simula o processo de **login** e **seleção de livros** de uma biblioteca virtual.
+Este projeto é um programa em Python que simula o processo de **login** e **seleção de livros** de uma biblioteca virtual feito no exercício 8.
 
 ---
 
